@@ -33,27 +33,41 @@ function deepClone(obj) {
 }
 ;
 const obj = {
-    a: 1,
-    b: {
+    num: 1,
+    object: {
         c: 2,
         arr: [1, 2, 3]
     },
-    c: [1, '2', [555, 'hyojin']],
-    d: () => {
+    array: [1, '2', [555, 'hyojin']],
+    arrowFunc: () => {
         console.log("hi, heoolp");
     },
-    e: 'hyojin',
-    f: new Date(2022, 1),
-    g: String('new String'),
-    h: true,
-    i: new Map(),
-    j: new RegExp(/^[0-9]+$/),
-    k: /^[0-9]+$/,
+    str: 'hyojin',
+    date: new Date(2022, 1),
+    constructorStr: String('new String'),
+    boolean: true,
+    constructorMap: new Map(),
+    constructorRegExp: new RegExp(/^[0-9]+$/),
+    regExp: /^[0-9]+$/,
+    constructorFunc: function () {
+        return `hello, ${this.str}`;
+    }
 };
 const arr = [1, 2, 'str', { a: '1', 'b': () => console.log("hi") }, ['안', '녕'], { objOuter: '객체속', inner: { innerObj: '객체' } }];
 let copiedObj = deepClone(obj);
+let gg = obj.constructorFunc();
 // copiedObj.a = 2;
 // copiedObj.f = new Date(2021, 6)
 // copiedObj.h = false
-console.log(`결과시작\n\n`, copiedObj.i.set('rr', 'hyojin'), copiedObj, copiedObj.i.get('rr'), `\n\n결과 끝\n`);
+copiedObj.constructorFunc = function () {
+    return `hello ${this.regExp}`;
+};
+let a = copiedObj.constructorFunc();
+let aaa = new Date(2022, 1);
+let bbb = new Date(2020, 1);
+// a.constructorFunc = new Animal('dog', 'red')
+console.log(aaa.constructor === bbb.constructor);
+// let b = new Person('hyojin', 'black')
+// console.log('im a \n', a.constructor, '\n', b.constructor)
+// console.log(`결과시작\n\n`, copiedObj.i.set('rr', 'hyojin'), copiedObj, copiedObj.i.get('rr'), `\n\n결과 끝\n`,)
 //# sourceMappingURL=index.js.map
