@@ -45,34 +45,34 @@ const typedArrays = [
 ];
 
 // Type Check
-const isDate = (value: any): value is Date => value instanceof Date ?? false;
-const isObject = (value: any) => typeof value === "object" && !Array.isArray(value) && value !== null;
-const isSet = (value: any): value is Set<any> => value instanceof Set ?? false;
-const isMap = (value: any): value is Map<any, any> => value instanceof Map ?? false;
-const isRegExp = (value: any): value is RegExp => value instanceof RegExp ?? false;
-const isSymbol = (value: any): value is symbol => typeof value === "symbol" ?? false;
-const isTypedArray = (value: any): value is TypedArray => typedArrays.some((typedArray) => typedArray === value.constructor);
+export const isDate = (value: any): value is Date => value instanceof Date ?? false;
+export const isObject = (value: any) => typeof value === "object" && !Array.isArray(value) && value !== null;
+export const isSet = (value: any): value is Set<any> => value instanceof Set ?? false;
+export const isMap = (value: any): value is Map<any, any> => value instanceof Map ?? false;
+export const isRegExp = (value: any): value is RegExp => value instanceof RegExp ?? false;
+export const isSymbol = (value: any): value is symbol => typeof value === "symbol" ?? false;
+export const isTypedArray = (value: any): value is TypedArray => typedArrays.some((typedArray) => typedArray === value.constructor);
 
 // Copy Function
-function copyDate(value: Date): Date {
+export function copyDate(value: Date): Date {
   return new Date(value.getTime());
 }
 
-function copyObject(value: Obj): Obj {
+export function copyObject(value: Obj): Obj {
   return Object.keys(value).reduce<Record<string, any>>((obj, key) => {
     obj[key] = cloneDeep(value[key]);
     return obj;
   }, {});
 }
 
-function copyArray(value: Array<any>) {
+export function copyArray(value: Array<any>) {
   return value.reduce((arr, item, idx) => {
     arr[idx] = cloneDeep(item);
     return arr;
   }, []);
 }
 
-function copySet<T>(value: Set<T>) {
+export function copySet<T>(value: Set<T>) {
   const result = new Set();
   // new Set의 add로 value 안에 있는 속성들까지 copy
   value.forEach((val) => {
@@ -82,7 +82,7 @@ function copySet<T>(value: Set<T>) {
   return result;
 }
 
-function copyMap(value: Map<string, any>) {
+export function copyMap(value: Map<string, any>) {
   const result = new Map();
   // new Map의 set으로 value 안에 있는 key:value 까지 copy
   value.forEach((val, key) => {
@@ -91,18 +91,18 @@ function copyMap(value: Map<string, any>) {
   return result;
 }
 
-function copyRegExp(value: RegExp) {
+export function copyRegExp(value: RegExp) {
   return new RegExp(value.source, value.flags);
 }
 
-function copySymbol(value: symbol) {
+export function copySymbol(value: symbol) {
   const strSymbol = String(value);
   const braketIndex = strSymbol.indexOf("(");
   const strValue = strSymbol.substring(braketIndex).replace(/\(|\)/g, "");
   return parseInt(strValue) ? Symbol(+strValue) : Symbol(strValue);
 }
 
-function copyTypedArray(value: GenericTypedArray<TypedArray>) {
+export function copyTypedArray(value: GenericTypedArray<TypedArray>) {
   // TypedArray의 constructor => Function
   // 같은 value 인자로 넘겨서 생성자로 생성 후, 리턴
   return new value.constructor(value);
