@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose ./test",
-    "start": "tsc-watch --onSuccess \" node dist/index.js\""
+    "test": "jest --verbose ./test" 
   },
   "repository": {
     "type": "git",
