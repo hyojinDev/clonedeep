@@ -26,3 +26,28 @@ JS는 데이터를 저장하기 위한 별도의 메모리 공간을 확보하�
 완벽한 깊은복사에 대응하지 못한다.  
 Lodash같은 라이브러리를 사용하더라도 deep clone의 과정을 이해하지 못하면 Object를 자유롭게 다루지 못할 것 같아 직접 구현해보기로 했다.
 ```
+<br/>
+
+## ⚙️ Environment
+
+> TypeScript Version v4.6.3 (Mac)
+>
+> Node Version v17.7.1
+>
+> Npm Version v8.5.2
+>
+> MacOS Monterey Version 12.3
+<br/>
+
+## 🛠 Usage
+
+```javascript
+$ cd src
+$ ts-node index.ts
+```
+
+**Test Code 실행** 
+
+```javascript
+$ npm run test
+```
