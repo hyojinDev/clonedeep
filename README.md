@@ -49,5 +49,6 @@ $ ts-node index.ts
 **Test Code 실행** 
 
 ```javascript
+$ npm install
 $ npm run test
 ```
